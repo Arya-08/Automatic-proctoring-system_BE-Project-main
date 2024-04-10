@@ -1,0 +1,196 @@
+<%- include('../partials/user-sidenav'); -%>
+
+<!-- Main content -->
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <div class="container-fluid py-3 bg-primary top-padding" style="border-bottom:0.0625rem solid #e9ecef33 !important;" >
+        <div class="row align-items-center">
+            <div class="col col-lg-auto text-center text-sm-left">
+                <h5 style="font-family: 'LakeShore', sans-serif" class="h2 text-white d-inline-block mb-0 custom-heading">Exam center</h5>
+            </div>
+            <div class="mx-auto mb-0 text-center"> 
+                <% if(errorMsg && errorMsg.length > 0){ %>
+                    <div class="alert alert-danger fade show " role="alert">
+                    <span class="alert-text mr-2">
+                        <%= errorMsg %>
+                    </span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <% } %>
+
+                <% if(username ){ %>
+                <div class="alert alert-success fade show " role="alert">
+                    <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                    <span class="alert-text mr-2"><strong></strong>
+                     Welcome   <%= username %> and check your logs
+                    </span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <br>
+                <% } %>
+            </div>
+            <!-- 
+            <div class="col-right ml-auto mr-3  d-sm-block">
+                <div class="media align-items-center">
+                    <span class="avatar avatar-sm rounded-circle" >
+                        <img alt="" src="../../Python/uploads/1234.png" style="width:max-content">
+                    </span>
+                    <div class="media-body  ml-2  d-none d-lg-block">
+                        <h4 class="mb-0  " style="color: white;font-family:'Lobster', cursive;">Welcome
+                            <b><%=user.name%></b>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+    <div class="main-content" id="panel">
+    
+        <div>             
+             
+                          
+             <br>
+             <br>
+            <div class="container w-75 mx-auto  p-0" > 
+                
+                <% if(tests!=null) { %>
+                    <table class="table" style="table-layout: fixed;
+                    ">
+                    <tr> 
+                        <div class="fixed-table-container"> 
+                          
+                            <thead class="thead-light" style="" >
+                                <th style="justify-content: center;font-size:15px;font-weight: bold;color:black"> Attempt  </th>
+                                <th style="font-size:15px;font-weight: bold;color:black"> START  </th>
+                                <th style="font-size:15px;font-weight: bold;color:black"> END  </th>
+                               
+                                <th style="font-size:15px;font-weight: bold;"> looked away </th>
+                                <th style="text-align:center;justify-content: center;font-size:15px;font-weight: bold;white-space: -o-pre-wrap; 
+                                word-wrap: break-word;
+                                white-space: pre-wrap; 
+                                white-space: -moz-pre-wrap; 
+                                white-space: -pre-wrap;">More than 1 person found</th>
+                                <th style="font-size:15px;font-weight: bold;">no person</th>
+                                <th style="text-align:center;font-size:15px;font-weight: bold;white-space: -o-pre-wrap; 
+                                word-wrap: break-word;
+                                white-space: pre-wrap; 
+                                white-space: -moz-pre-wrap; 
+                                white-space: -pre-wrap;">Object found </th>
+                                
+                              
+                            </thead>
+                              
+                        
+                    </tr>
+                   
+                       <%tests.logs.forEach(function (logs) {%> 
+                       
+                        <% if((logs.userId == user ) && (logs.logs!= undefined)){ %>
+                            
+                             
+                            <% for(i=0;i<logs.logs.length;i++) {%>  
+                    <tr class="table-primary" style="color: black;  ">
+                        <td style="white-space: -o-pre-wrap; 
+                            word-wrap: break-word;
+                            white-space: pre-wrap; 
+                            white-space: -moz-pre-wrap; 
+                            white-space: -pre-wrap;"> <%= logs.userId %></td>      
+                        <td style="white-space: -o-pre-wrap; 
+                        word-wrap: break-word;
+                        white-space: pre-wrap; 
+                        white-space: -moz-pre-wrap; 
+                        white-space: -pre-wrap;"> <%= logs.testStartedAt %>  </td>
+                        <td style="white-space: -o-pre-wrap; 
+                        word-wrap: break-word;
+                        white-space: pre-wrap; 
+                        white-space: -moz-pre-wrap; 
+                        white-space: -pre-wrap;"><%= logs.testCompletedAt %></td>
+                        
+                        <td><%= logs.logs[i][0]%></td>
+                      
+                        <td><%= logs.logs[i][1] %></td>    
+                        <td><a href=""> <%= logs.logs[i][2]%> </a> </td>
+                        <td><%= logs.logs[i][3] %></td>
+                       
+                    
+                    </tr>
+                    <% }}  else{ %>
+                        <% }}); %>
+                    </div> 
+                   
+                    </table>
+                    <% } %>
+
+                    <% if(tests!=null) { %>
+                        <table class="table" id="score">
+                        <tr> 
+                            <div class="fixed-table-container"> 
+                              
+                                <thead class="thead-light" style="" >
+            
+                                    <th style="font-size:15px;font-weight: bold;">User ID </th>
+                                    <th style="font-size:15px;font-weight: bold;">test ID</th>
+                                    <th style="font-size:15px;font-weight: bold;">SCORE</th>
+                                    <th style="font-size:15px;font-weight: bold;">ANswers</th>
+                                  
+                                </thead>
+                                  
+                            
+                        </tr>
+                       
+                       
+                            <%tests.responses.forEach(function (logs) {%>
+                                <% if(logs.userId == user ){ %>
+                        <tr class="table-primary" style="color: black;">
+                           
+                            <td> <%=logs.userId._id%> </td>
+                            
+                            <td><a href="/test/<%=testid%>/<%=tests.logs[0].userId._id%>/logs"> <%= testid %> </a> </td>
+                            
+                            
+                           
+                            <td><%= logs.score %></td>
+                            <td> 
+                                [
+                                
+                            <% logs.answers.forEach(function (ans) { %>
+                                
+                               <% if(ans==null) {%>  
+                               ,
+                                <%}else{%>
+                                <%= ans %>, 
+                            <%}});%>
+                            ]
+                        </td>
+                        
+                            
+    
+                        </tr>
+                        <%} else{ %>
+                            <%} });%>
+                        </div> 
+                       
+                        <% }%>
+                        
+                        </table>
+                  
+                   
+            </div>
+        
+        </div>
+     
+    <!-- Header -->
+    <div class="col-md-10">
+    
+       <br>
+    </div>
+
+ 
+
+</div>
+
